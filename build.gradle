@@ -1,0 +1,91 @@
+group 'com.tonylawrence'
+
+buildscript {
+  ext.funk_version = '1.0.0'
+  ext.kotlin_version = '1.0.6'
+
+  repositories { jcenter(); mavenCentral() }
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.8"
+  }
+}
+
+apply plugin: 'kotlin'
+
+sourceSets { laws {
+  compileClasspath += main.output + test.output
+  runtimeClasspath += main.output + test.output
+} }
+
+repositories { jcenter(); mavenCentral() }
+
+dependencies {
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+  testCompile "junit:junit:4.12"
+  testCompile "com.natpryce:hamkrest:1.2.3.0"
+}
+
+jar {
+  manifest {
+    attributes 'Implementation-Title': 'funk',
+      'Implementation-Vendor': 'com.tonylawrence',
+      'Implementation-Version': funk_version
+    }
+}
+
+apply plugin: 'org.jetbrains.dokka'
+dokka { outputFormat 'javadoc'; outputDirectory 'build/javadoc' }
+
+task sourcesJar(type: Jar) { classifier = 'sources'; from sourceSets.main.allSource }
+task javadocJar(type: Jar, dependsOn: 'dokka') { classifier 'javadoc'; from 'build/javadoc' }
+
+artifacts { archives sourcesJar, javadocJar }
+
+apply plugin: 'signing'
+
+signing {
+  required { hasProperty("sign") || gradle.taskGraph.hasTask("uploadArchives") }
+  sign configurations.archives
+}
+
+apply plugin: 'maven'
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+        authentication(userName: project.properties["ossrh.username"], password: project.properties["ossrh.password"])
+      }
+
+      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+        authentication(userName: project.properties["ossrh.username"], password: project.properties["ossrh.password"])
+      }
+
+      pom.project {
+        name 'Funk'
+        version "$funk_version"
+        packaging 'jar'
+        description 'Kotlin, the missing functions'
+        url 'https://github.com/tonyklawrence/funk'
+
+        scm {
+          connection 'git@github.com:tonyklawrence/funk.git'
+          url 'https://github.com/tonyklawrence/funk'
+        }
+
+        licenses {
+          license { name 'Apache 2.0'; url 'http://opensource.org/licenses/Apache-2.0' }
+        }
+
+        developers {
+          developer { id 'tonyklawrence'; name 'Tony Lawrence' }
+        }
+      }
+    }
+  }
+}
