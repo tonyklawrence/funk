@@ -5,3 +5,16 @@
 FunK, the missing kotlin functions
 
 This small library adds those functions to Kotlin that you are surpised that didn't exist in the first place.
+
+## Compose
+
+It is now possible to compose two functions together (assuming that the output / input matches)
+
+> f compose g == g ° f
+
+## To Option
+
+We can now convert types into optional (nullable) values instead of throwing exception
+
+> "10".toIntOption = 10
+> "foo".toIntOption = null
