@@ -1,7 +1,7 @@
 group 'com.tonylawrence'
 
 buildscript {
-  ext.funk_version = '1.2.1'
+  ext.funk_version = '1.2.2'
   ext.kotlin_version = '1.1.1'
 
   repositories { jcenter(); mavenCentral() }
