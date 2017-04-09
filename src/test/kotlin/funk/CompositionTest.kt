@@ -7,10 +7,21 @@ import org.junit.Test
 class CompositionTest {
 
     @Test fun composition() {
-        val f = { i: Int -> i + 1 }
-        val g = { i: Int -> i * 2 }
+        val f: (String) -> Int = String::length
+        val g: (Int) -> String = Int::toString
 
-        (f compose g)(1) shouldMatch equalTo(3)
-        (g compose f)(1) shouldMatch equalTo(4)
+        (f compose g)("string") shouldMatch equalTo("6")
+        (g compose f)(100) shouldMatch equalTo(3)
+        ((f compose g) compose f)("string") shouldMatch equalTo(1)
+    }
+
+    @Test fun `compose with unit`() {
+        val f: () -> String = { "string" }
+        val g: (String) -> Int = String::length
+        val h: (Int) -> Unit = {}
+
+        (f compose g)() shouldMatch equalTo(6)
+        (g compose h)("a string") shouldMatch equalTo(Unit)
+        ((f compose g) compose h)() shouldMatch equalTo(Unit)
     }
 }
