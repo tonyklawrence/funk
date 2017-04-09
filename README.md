@@ -1,5 +1,6 @@
 [![Travis Build Status](https://api.travis-ci.org/tonyklawrence/funk.svg)](https://travis-ci.org/tonyklawrence/funk)
 [![Current Release Vesion](https://img.shields.io/badge/funk-1.2.1-blue.svg)](https://github.com/tonyklawrence/funk/releases/tag/v1.2.1)
+[![Maven Central](https://img.shields.io/maven-central/v/com.tonylawrence/funk.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.tonylawrence%22%20AND%20a%3A%22funk%22)
 
 # FunK
 FunK, the missing kotlin functions
