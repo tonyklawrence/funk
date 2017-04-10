@@ -7,6 +7,21 @@ FunK, the missing kotlin functions
 
 This small library adds those functions to Kotlin that you are surpised that didn't exist in the first place.
 
+### Gradle
+```groovy
+compile 'com.tonylawrence:funk:1.2.1'
+```
+
+### Maven
+```xml
+<dependency>
+    <groupId>com.tonylawrence</groupId>
+    <artifactId>funk</artifactId>
+    <version>1.2.1</version>
+</dependency>
+```
+
+---
 ## Compose
 
 It is now possible to compose two functions together (assuming that the output / input matches)
