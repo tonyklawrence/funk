@@ -2,7 +2,7 @@ group 'com.tonylawrence'
 
 buildscript {
   ext.funk_version = '1.2.2'
-  ext.kotlin_version = '1.1.1'
+  ext.kotlin_version = '1.1.4'
 
   repositories { jcenter(); mavenCentral() }
   dependencies {
@@ -20,7 +20,7 @@ dependencies {
   compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
   testCompile "junit:junit:4.12"
-  testCompile "com.natpryce:hamkrest:1.3.0.0"
+  testCompile "com.natpryce:hamkrest:1.4.2.0"
 }
 
 jar {

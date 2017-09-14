@@ -9,7 +9,7 @@ This small library adds those functions to Kotlin that you are surpised that did
 
 ### Gradle
 ```groovy
-compile 'com.tonylawrence:funk:1.2.1'
+compile 'com.tonylawrence:funk:1.2.2'
 ```
 
 ### Maven
@@ -17,7 +17,7 @@ compile 'com.tonylawrence:funk:1.2.1'
 <dependency>
     <groupId>com.tonylawrence</groupId>
     <artifactId>funk</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
 </dependency>
 ```
 
